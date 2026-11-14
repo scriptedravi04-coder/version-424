@@ -1,0 +1,38 @@
+node_modules
+dist
+.env
+
+# One-off repair scripts belong in scripts/ (or nowhere) — 18 of them had piled up in the root.
+/fix_*.cjs
+/fix_*.js
+/update_server.*
+/get_schema.*
+/test-axios.js
+# Local runtime artefacts
+db_mock.json.corrupted-*.bak
+scripts/brand/startup-links.html
+# vite-plugin-pwa dev service worker output (made by `npm run dev`)
+dev-dist
+
+# v335: iPhone app shell packages
+ios-app/node_modules
+
+# v338: tests travel packed in dev/tests.tgz (AI Studio 1,000-file GitHub limit). Loose copies never get pushed.
+*.test.js
+*.test.jsx
+*.test.ts
+*.test.tsx
+*.spec.js
+*.spec.ts
+
+# v364: Android app shell — the Gradle project, packages and Firebase file are made / kept on the Mac
+android-app/node_modules
+android-app/android
+android-app/assets
+android-app/google-services.json
+*.keystore
+*.jks
+.local-ip
+
+# v396 (QA S-12): Mac-only keys file — never pushed to GitHub (scripts/mac-local.sh copies it to .env on the Mac)
+local.env

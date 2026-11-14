@@ -1,0 +1,30 @@
+{
+  "name": "ybex-android",
+  "private": true,
+  "version": "1.0.4",
+  "description": "Ybex Android app (Capacitor shell, v364). Carries the web build inside the app so it opens offline. See README.md.",
+  "scripts": {
+    "web": "cd .. && VITE_API_ORIGIN=${VITE_API_ORIGIN:-https://ybexapp.ai.studio} npx vite build && node scripts/ota-bundle.mjs",
+    "assets": "npx @capacitor/assets generate --android --iconBackgroundColor '#7E00DC' --iconBackgroundColorDark '#7E00DC' --splashBackgroundColor '#7E00DC' --splashBackgroundColorDark '#7E00DC'",
+    "version": "node -e \"const fs=require('fs');try{const l=JSON.parse(fs.readFileSync('../dist/client/ota/latest.json','utf8'));const c=JSON.parse(fs.readFileSync('capacitor.config.json','utf8'));c.plugins.CapacitorUpdater.version=l.version;fs.writeFileSync('capacitor.config.json',JSON.stringify(c,null,2)+'\\n');console.log('[android] built-in web version:',l.version)}catch(e){console.warn('[android] built-in version not set:',e.message)}\"",
+    "sync": "npm run web && npm run version && npx cap sync android",
+    "open": "npx cap open android",
+    "prepare:mac": "bash scripts/mac-prepare-android.sh"
+  },
+  "dependencies": {
+    "@capacitor/android": "^7.0.0",
+    "@capacitor/app": "^7.0.0",
+    "@capacitor/browser": "^7.0.0",
+    "@capacitor/core": "^7.0.0",
+    "@capacitor/keyboard": "^7.0.0",
+    "@capacitor/push-notifications": "^7.0.0",
+    "@capacitor/splash-screen": "^7.0.0",
+    "@capacitor/status-bar": "^7.0.0",
+    "@capgo/capacitor-social-login": "^7.20.0",
+    "@capgo/capacitor-updater": "^7.0.0"
+  },
+  "devDependencies": {
+    "@capacitor/assets": "^3.0.5",
+    "@capacitor/cli": "^7.0.0"
+  }
+}

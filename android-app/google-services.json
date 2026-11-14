@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "213994152597",
+    "project_id": "ybex-87436",
+    "storage_bucket": "ybex-87436.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:213994152597:android:5791488a54590a7978b19c",
+        "android_client_info": {
+          "package_name": "com.ybex.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDUfO0UmC0an0vC2dxe9fjJpK545dflYho"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- v391 (mobile QA): pinch-zoom is allowed again (accessibility); iPhone input auto-zoom is prevented in index.css by 16px inputs. v330 (Ravi): viewport-fit=cover turns on the iPhone safe areas (home bar / notch), so the env(safe-area-inset-*) padding the bars already use now works. Top stays clear: the "default" status bar keeps the page below the clock. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, interactive-widget=resizes-content" />
+    <meta name="theme-color" content="#F2F2F7" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <!-- Session 43: "default" — iPhone paints the bar with the page colour (StatusBarSync), dark clock. -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="Ybex" />
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <!-- Session 43 / v297: iPhone / iPad launch images = plain purple gradient only (first frame of the launch animation; the logo appears once, inside the animation) -->
+    <link rel="apple-touch-startup-image" href="/splash/launch-1320x2868.png" media="(device-width: 440px) and (device-height: 956px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" />
+    <link rel="apple-touch-startup-image" href="/splash/launch-1206x2622.png" media="(device-width: 402px) and (device-height: 874px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" />
+    <link rel="apple-touch-startup-image" href="/splash/launch-1290x2796.png" media="(device-width: 430px) and (device-height: 932px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" />
+    <link rel="apple-touch-startup-image" href="/splash/launch-1179x2556.png" media="(device-width: 393px) and (device-height: 852px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" />
+    <link rel="apple-touch-startup-image" href="/splash/launch-1284x2778.png" media="(device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" />
+    <link rel="apple-touch-startup-image" href="/splash/launch-1170x2532.png" media="(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" />
+    <link rel="apple-touch-startup-image" href="/splash/launch-1125x2436.png" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" />
+    <link rel="apple-touch-startup-image" href="/splash/launch-1080x2340.png" media="(device-width: 360px) and (device-height: 780px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" />
+    <link rel="apple-touch-startup-image" href="/splash/launch-1242x2688.png" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" />
+    <link rel="apple-touch-startup-image" href="/splash/launch-828x1792.png" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" />
+    <link rel="apple-touch-startup-image" href="/splash/launch-1242x2208.png" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" />
+    <link rel="apple-touch-startup-image" href="/splash/launch-750x1334.png" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" />
+    <link rel="apple-touch-startup-image" href="/splash/launch-640x1136.png" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" />
+    <link rel="apple-touch-startup-image" href="/splash/launch-2048x2732.png" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" />
+    <link rel="apple-touch-startup-image" href="/splash/launch-1668x2388.png" media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" />
+    <link rel="apple-touch-startup-image" href="/splash/launch-1640x2360.png" media="(device-width: 820px) and (device-height: 1180px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" />
+    <link rel="apple-touch-startup-image" href="/splash/launch-1668x2224.png" media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" />
+    <link rel="apple-touch-startup-image" href="/splash/launch-1620x2160.png" media="(device-width: 810px) and (device-height: 1080px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" />
+    <link rel="apple-touch-startup-image" href="/splash/launch-1536x2048.png" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" />
+    <link rel="apple-touch-startup-image" href="/splash/launch-1488x2266.png" media="(device-width: 744px) and (device-height: 1133px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" />
+    <script>
+      // First script in head to catch and suppress any cross-origin script or iframe errors
+      window.onerror = function(msg, url, lineNo, columnNo, error) {
+        if (msg === 'Script error.' || (typeof msg === 'string' && (msg.includes('ResizeObserver') || msg.includes('Script error')))) {
+          return true;
+        }
+      };
+      window.addEventListener('error', function(event) {
+        if (event.message === 'Script error.' || event.message?.includes('ResizeObserver') || event.message?.includes('Script error')) {
+          event.preventDefault();
+          event.stopImmediatePropagation?.();
+        }
+      }, true);
+      window.addEventListener('unhandledrejection', function(event) {
+        if (event.reason?.message?.includes?.('ResizeObserver') || event.reason?.message?.includes?.('Script error')) {
+          event.preventDefault();
+        }
+      });
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- v286 (Ravi: "app khulne mein 3-4 sec khaali purple"): the font file no longer blocks the first
+         paint — the logo shows at once and the fonts swap in when they arrive. -->
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600;700&family=DM+Mono:wght@400;500&family=Quicksand:wght@300;600;700&display=swap">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600;700&family=DM+Mono:wght@400;500&family=Quicksand:wght@300;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600;700&family=DM+Mono:wght@400;500&family=Quicksand:wght@300;600;700&display=swap" rel="stylesheet"></noscript>
+    <!-- v375 (Ravi): search title says what the app does first; the tagline stays on the landing hero only. -->
+    <title>Ybex | Find Influencers &amp; Get Brand Deals — 0% Fee</title>
+    <!-- v332: link-preview text no longer says "escrow" (Ravi: we say "secure payment hold") -->
+    <meta name="description" content="Brands hire verified Instagram creators directly, creators get paid brand deals. India's 0% fee creator marketplace." />
+    <meta property="og:title" content="Ybex | Find Influencers &amp; Get Brand Deals — 0% Fee" />
+    <meta property="og:description" content="Brands hire verified Instagram creators directly, creators get paid brand deals. India's 0% fee creator marketplace." />
+    <!-- Session 43 (Ravi): link previews (WhatsApp, Telegram, Gmail, Android share sheet) show the
+         Ybex picture instead of a grey globe. Absolute URL — preview bots need the full address. -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Ybex" />
+    <meta property="og:url" content="https://ybexapp.ai.studio/" />
+    <meta property="og:image" content="https://ybexapp.ai.studio/og-image.jpg" />
+    <meta property="og:image:secure_url" content="https://ybexapp.ai.studio/og-image.jpg" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Ybex — Find influencers and get brand deals. 0% fee." />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Ybex | Find Influencers &amp; Get Brand Deals — 0% Fee" />
+    <meta name="twitter:description" content="Brands hire verified Instagram creators directly, creators get paid brand deals. India's 0% fee creator marketplace." />
+    <meta name="twitter:image" content="https://ybexapp.ai.studio/og-image.jpg" />
+
+    <!-- Google tag (gtag.js) with fallback error handling -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YQXC5TWFS0" onerror="this.onerror=null;"></script>
+    <script>
+      try {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-YQXC5TWFS0');
+      } catch (e) {}
+    </script>
+    <!-- Session 43: installed-app launch (Claude Design "Ybex App Icon & Splash", 4b + launch animation).
+         Plain HTML/CSS so it plays while the app files are still downloading. Only in the installed
+         app (home-screen / TWA), once per app session. The exit (shrink into the home banner) is run by
+         src/components/layout/AppLaunchSplash.jsx through window.__ybSplash. -->
+    <script>
+      /* v292: installed phone app, first open of the session -> the splash gradient is the page background
+         from the first paint, so the launch image never flashes grey / flat purple before the splash. */
+      try { var yS = !!window.Capacitor /* v335: iPhone app */ || window.navigator.standalone === true || (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches);
+        if (yS && window.innerWidth < 768 && sessionStorage.getItem("yb_splash_seen") !== "1") document.documentElement.classList.add("yb-splash-active");
+        /* Session 57 (Ravi: "direct apna animation"): Android's own launch screen is now plain #7E00DC with
+           nothing on it; on Android the animation starts from that same flat purple and the gradient fades in. */
+        if (/Android/i.test(navigator.userAgent || "")) document.documentElement.classList.add("yb-android"); } catch (e) {}
+    </script>
+    <script>
+      /* v334 (offline app / instant open): a signed-in phone paints the app's grey page with a few placeholder
+         cards from the very first frame — before the app files run (they come from the phone's saved copy, so this
+         is the same online and offline). The launch splash (purple, Android #7E00DC) is untouched: while it plays,
+         this shell stays hidden under it. It disappears as soon as React draws the real screen into #root. */
+      try { if (window.innerWidth < 768 && localStorage.getItem("ybex_token") && !document.documentElement.classList.contains("yb-splash-active")) document.documentElement.classList.add("yb-shell-on"); } catch (e) {}
+    </script>
+    <style>
+      #yb-shell{display:none}
+      html.yb-shell-on #root:empty + #yb-shell{display:block;min-height:100vh;min-height:100dvh;background:#F2F2F7;padding:calc(env(safe-area-inset-top, 0px) + 18px) 16px 0;box-sizing:border-box}
+      html.yb-shell-on #yb-shell i{display:block;border-radius:18px;background:#E8E8EE;margin-bottom:12px}
+      /* Session 43 (Ravi): installed-app first paint matches page background (#F2F2F7); splash purple applies only while splash is active so no purple line peeks at the bottom of screens */
+      @media (display-mode: standalone), (display-mode: fullscreen) { html, body { background: #F2F2F7; } }
+      html.yb-splash-active { background: linear-gradient(170deg,#9B00FF 0%,#6200B4 55%,#2E0066 100%) fixed !important; }
+      body.yb-splash-active { background: #9B00FF !important; }
+      /* Session 58 (Ravi): iPhone paints the strip behind the clock from <body>. The body class only arrives with
+         the script further down, so the first frame could show the grey #F2F2F7 strip — purple from frame one now. */
+      html.yb-splash-active body { background: #9B00FF !important; }
+      html.yb-splash-active.yb-android { background: #7E00DC !important; }
+      html.yb-android body.yb-splash-active, html.yb-splash-active.yb-android body { background: #7E00DC !important; }
+      /* v282: Claude Design "Ybex App Flow" splash — camera pops in, flashes, the flash becomes the
+         dot of "Ybex." and a shine sweeps the word. Sizes come from --k (set by the script below):
+         1 = the 390px design frame. Phases .p1–.p6 are added by the script on the design's timeline. */
+      #yb-splash{position:fixed;inset:0;z-index:2147483000;overflow:hidden;-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent;--k:1}
+      #yb-splash .p{position:absolute;top:0;left:0;width:100%;height:100%;overflow:hidden;background:linear-gradient(170deg,#9B00FF 0%,#6200B4 55%,#2E0066 100%)}
+      /* Session 57: Android starts flat #7E00DC (same as its launch screen) → the gradient fades in with the camera. */
+      #yb-splash .fl{position:absolute;inset:0;background:#7E00DC;opacity:0;pointer-events:none}
+      html.yb-android #yb-splash .fl{opacity:1}
+      html.yb-android #yb-splash.p1 .fl{opacity:0;transition:opacity 480ms ease-out}
+      #yb-splash .gl{position:absolute;top:-80px;right:-90px;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.14),rgba(255,255,255,0) 70%)}
+      #yb-splash .w{position:absolute;left:50%;top:50%;width:calc(241.8px * var(--k));height:calc(70.6px * var(--k));transform:translate(-50%,-50%)}
+      #yb-splash .wi{position:absolute;inset:0;opacity:0;transform:scale(1.06)}
+      #yb-splash svg{display:block;width:100%;height:100%;overflow:visible}
+      #yb-splash .s{position:absolute;inset:0}
+      #yb-splash .sh{transform:translateX(-400px)}
+      #yb-splash .d{position:absolute;left:94.1%;top:82%;width:7.28%;aspect-ratio:1;border-radius:50%;background:#fff;box-shadow:0 0 10px rgba(255,255,255,.85);opacity:0;transform:translate(-50%,-50%) scale(2.4)}
+      #yb-splash .wh{position:absolute;inset:0;z-index:5;background:#fff;pointer-events:none;opacity:0}
+      #yb-splash .cx{position:absolute;left:50%;top:50%;z-index:6;pointer-events:none;transform:translate(calc(-36.4px * var(--k)),calc(-14.1px * var(--k)))}
+      #yb-splash .cm{display:block;width:calc(70px * var(--k));height:auto;transform-origin:52% 36%;filter:drop-shadow(0 8px 12px rgba(0,0,0,.45));opacity:0;transform:scale(0) rotate(-30deg)}
+      #yb-splash .bu{position:absolute;left:calc(50% + 106.6px * var(--k));top:calc(50% + 22.6px * var(--k));width:calc(260px * var(--k));height:calc(260px * var(--k));margin:calc(-130px * var(--k)) 0 0 calc(-130px * var(--k));z-index:7;pointer-events:none;border-radius:50%;background:radial-gradient(circle,#fff 0%,#fff 7%,rgba(255,255,255,.75) 14%,rgba(233,213,255,.3) 32%,rgba(233,213,255,0) 62%);opacity:0;transform:scale(.2)}
+      #yb-splash .bu i{position:absolute;background:linear-gradient(90deg,rgba(255,255,255,0),#fff,rgba(255,255,255,0))}
+      #yb-splash .bu i:first-child{left:2%;right:2%;top:50%;height:3px;margin-top:-1.5px}
+      #yb-splash .bu i:last-child{top:14%;bottom:14%;left:50%;width:3px;margin-left:-1.5px;background:linear-gradient(180deg,rgba(255,255,255,0),#fff,rgba(255,255,255,0))}
+      /* p1 camera pops in */
+      #yb-splash.p1 .cm{opacity:1;transform:scale(1) rotate(0);transition:transform 320ms cubic-bezier(.34,1.8,.64,1),opacity 120ms}
+      /* p2 camera swings to the right, tilts */
+      #yb-splash.p2 .cx{transform:translate(calc(70.2px * var(--k)),calc(8.5px * var(--k)));transition:transform 360ms cubic-bezier(.65,0,.35,1)}
+      #yb-splash.p2 .cm{transform:scale(1) rotate(-8deg);transition:transform 360ms cubic-bezier(.65,0,.35,1)}
+      /* p3 flash */
+      #yb-splash.p3 .cm{opacity:0;transform:scale(.7);transition:opacity 140ms ease-out,transform 160ms ease-in}
+      #yb-splash.p3 .wh{opacity:.5;transition:opacity 60ms}
+      #yb-splash.p3 .bu{opacity:1;transform:scale(1);transition:opacity 70ms ease-out,transform 90ms ease-out}
+      /* p4 flash fades, word + dot appear */
+      /* v286: .st = start with the word already shown (matches the phone's launch image), no fade-in. */
+      #yb-splash.st .wi{opacity:1;transform:none;transition:none}
+      #yb-splash.st .d{opacity:1;transform:translate(-50%,-50%) scale(1);transition:none}
+      #yb-splash.go .wi{opacity:0;transform:scale(1.06);transition:opacity 140ms ease-in,transform 140ms ease-in}
+      #yb-splash.go .d{opacity:0;transform:translate(-50%,-50%) scale(2.4);transition:opacity 120ms ease-in,transform 140ms ease-in}
+      #yb-splash.p4 .wh{opacity:0;transition:opacity 320ms ease-out}
+      #yb-splash.p4 .bu{opacity:0;transform:scale(.07);transition:opacity 380ms ease-in,transform 380ms cubic-bezier(.4,0,.2,1)}
+      #yb-splash.p4 .wi{opacity:1;transform:none;transition:opacity 260ms ease-out,transform 420ms cubic-bezier(.22,1,.36,1)}
+      #yb-splash.p4 .d{opacity:1;transform:translate(-50%,-50%) scale(1);transition:opacity 120ms,transform 420ms cubic-bezier(.34,1.56,.64,1)}
+      /* p5 shine */
+      #yb-splash.p5 .sh{transform:translateX(1400px);transition:transform 340ms cubic-bezier(.4,0,.2,1)} /* Session 58: ends at ~1.24 s, before the 1.25 s exit, so the shine is never cut */
+      @media (prefers-reduced-motion:reduce){
+        #yb-splash .cx,#yb-splash .bu,#yb-splash .wh,#yb-splash .sh{display:none}
+        #yb-splash .wi{opacity:1;transform:none}
+        #yb-splash .d{opacity:1;transform:translate(-50%,-50%)}}
+    </style>
+      <!-- Session 43 (from Ravi's AI Studio fix): in AI Studio's preview the dev server's hot-reload
+         socket ("vite-hmr") can't connect and threw "WebSocket closed without opened". Only that
+         one socket is answered with a quiet stand-in; every other socket (Socket.IO chat, live
+         refresh) uses the real WebSocket. A production build never opens a vite-hmr socket. -->
+    <script>
+      (function () {
+        var Native = window.WebSocket;
+        if (!Native || Native.__ybWrapped) return;
+        function isHmr(p) { return p === "vite-hmr" || (Array.isArray(p) && p.indexOf("vite-hmr") !== -1); }
+        function Quiet() {
+          var self = this;
+          this.readyState = 1; this.protocol = "vite-hmr"; this.url = "";
+          this.onopen = null; this.onmessage = null; this.onclose = null; this.onerror = null;
+          this.send = function () {}; this.close = function () { self.readyState = 3; };
+          this.addEventListener = function (type, fn) {
+            if (type === "open" && typeof fn === "function") setTimeout(function () { try { fn({ type: "open" }); } catch (e) {} }, 0);
+          };
+          this.removeEventListener = function () {};
+          setTimeout(function () { if (typeof self.onopen === "function") { try { self.onopen({ type: "open" }); } catch (e) {} } }, 0);
+        }
+        function Wrapped(url, protocols) {
+          if (isHmr(protocols)) return new Quiet();
+          return protocols === undefined ? new Native(url) : new Native(url, protocols);
+        }
+        Wrapped.prototype = Native.prototype;
+        Wrapped.CONNECTING = 0; Wrapped.OPEN = 1; Wrapped.CLOSING = 2; Wrapped.CLOSED = 3;
+        Wrapped.__ybWrapped = true;
+        window.WebSocket = Wrapped;
+        window.addEventListener("unhandledrejection", function (e) {
+          var m = e && e.reason && (e.reason.message || String(e.reason));
+          if (m && /WebSocket closed without opened/i.test(m)) e.preventDefault();
+        });
+      })();
+    </script>
+</head>
+  <body>
+    <div id="yb-splash" role="status" aria-label="Opening Ybex" hidden>
+      <div class="p">
+        <div class="fl"></div>
+        <div class="gl"></div>
+        <div class="w">
+          <div class="wi">
+            <svg viewBox="600 260 1370 400" aria-hidden="true"><g fill="#fff"><polygon points="626,305 706,305 792,449 878,305 953,305 827,515 827,630 752,630 752,514"/><rect x="979" y="286" width="73" height="344"/><path fill-rule="evenodd" d="M1150 377a101 128 0 1 1 0 256a101 128 0 1 1 0-256zM1115 436a63 69 0 1 0 0 138a63 69 0 1 0 0-138z"/><g transform="translate(1419 504) rotate(-45) scale(.67)"><path d="M-155 0H196M155 0A155 155 0 1 0 127 89" fill="none" stroke="#fff" stroke-width="92"/></g><polygon points="1558,380 1639,380 1692,452 1746,380 1823,380 1730,503 1827,630 1744,630 1690,554 1633,630 1554,630 1650,504"/></g></svg>
+            <svg class="s" viewBox="600 260 1370 400" aria-hidden="true"><defs><mask id="ybM" maskUnits="userSpaceOnUse" x="600" y="260" width="1370" height="400"><g fill="#fff"><polygon points="626,305 706,305 792,449 878,305 953,305 827,515 827,630 752,630 752,514"/><rect x="979" y="286" width="73" height="344"/><path fill-rule="evenodd" d="M1150 377a101 128 0 1 1 0 256a101 128 0 1 1 0-256zM1115 436a63 69 0 1 0 0 138a63 69 0 1 0 0-138z"/><g transform="translate(1419 504) rotate(-45) scale(.67)"><path d="M-155 0H196M155 0A155 155 0 1 0 127 89" fill="none" stroke="#fff" stroke-width="92"/></g><polygon points="1558,380 1639,380 1692,452 1746,380 1823,380 1730,503 1827,630 1744,630 1690,554 1633,630 1554,630 1650,504"/></g></mask><linearGradient id="ybG" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient></defs><g mask="url(#ybM)"><g transform="skewX(-20)"><rect class="sh" x="700" y="200" width="240" height="520" fill="url(#ybG)"/></g></g></svg>
+          </div>
+          <div class="d"></div>
+        </div>
+      </div>
+      <div class="cx"><img class="cm" alt="" src="data:image/webp;base64,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"></div>
+      <div class="bu"><i></i><i></i></div>
+      <div class="wh"></div>
+    </div>
+    <script>
+      (function () {
+        var el = document.getElementById("yb-splash");
+        var installed = false, seen = false;
+        try {
+          installed = !!window.Capacitor /* v335: iPhone app */ || window.navigator.standalone === true ||
+            (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches);
+          seen = sessionStorage.getItem("yb_splash_seen") === "1";
+        } catch (e) {}
+        if (!el || !installed || seen || window.innerWidth >= 768) { if (el) el.remove(); try { document.documentElement.classList.remove("yb-splash-active"); } catch (e) {} return; }
+        try { sessionStorage.setItem("yb_splash_seen", "1"); } catch (e) {}
+        el.hidden = false;
+        el.style.setProperty("--k", (Math.min(window.innerWidth * 0.62, 300) / 241.8).toFixed(3));
+        var root = document.documentElement, meta = document.querySelector('meta[name="theme-color"]');
+        var yAnd = root.classList.contains("yb-android"); // Session 58: Android starts from the flat #7E00DC of its own launch screen
+        root.style.backgroundColor = "#9B00FF"; if (meta) meta.setAttribute("content", yAnd ? "#7E00DC" : "#9B00FF");
+        try { document.body.style.backgroundColor = "#9B00FF"; } catch (e) {} // v286: strip purple, not white
+        try { root.classList.add("yb-splash-active"); document.body.classList.add("yb-splash-active"); } catch (e) {}
+        var t0 = Date.now(), reduce = false, gone = false;
+        try { reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches; } catch (e) {}
+        // v297 (Ravi: "pehle logo aa raha hai, phir animation — do baar"): the phone's launch image is now ONLY the
+        // purple gradient (no word), and the page starts the Claude Design "Ybex App Flow" intro at once:
+        // camera pops in -> swings -> flash -> the flash becomes the dot of "Ybex." -> shine. "Ybex." is on
+        // screen one time only. HOLD = 40 ms, just so the first purple frame paints and the pop-in can animate.
+        // Reduced motion: no animation, the word is simply shown (".st").
+        var HOLD = 40, INTRO = reduce ? 200 : HOLD + 1210;
+        el.className = reduce ? "st" : "";
+        if (!reduce) {
+          [[HOLD, "go p1"], [HOLD + 300, "p2"], [HOLD + 660, "p3"], [HOLD + 740, "p4"], [HOLD + 860, "p5"]].forEach(function (s) {
+            setTimeout(function () {
+              if (gone) return;
+              if (s[1].indexOf("go") === 0) el.classList.remove("st");
+              s[1].split(" ").forEach(function (c) { el.classList.add(c); });
+            }, s[0]);
+          });
+          // v367 (Ravi: "timing zyada ho to Ybex pe shine chalta rahe"): while the app is still loading after the
+          // intro, the shine sweeps "Ybex." again every 1.4 s until the splash leaves.
+          var sh = el.querySelector(".sh");
+          var shineAgain = function () {
+            if (gone || !sh || el.classList.contains("x")) return;
+            sh.style.transition = "none"; sh.style.transform = "translateX(-400px)";
+            void sh.getBoundingClientRect();
+            sh.style.transition = "transform 340ms cubic-bezier(.4,0,.2,1)"; sh.style.transform = "translateX(1400px)";
+            setTimeout(shineAgain, 1400);
+          };
+          setTimeout(shineAgain, HOLD + 860 + 1400);
+        }
+        function remove() {
+          if (gone) return; gone = true; el.remove();
+          root.style.backgroundColor = "";
+          try { document.body.style.backgroundColor = ""; } catch (e) {}
+          try { root.classList.remove("yb-splash-active"); document.body.classList.remove("yb-splash-active"); } catch (e) {}
+          try { window.dispatchEvent(new Event("ybex:splash-done")); } catch (e) {}
+        }
+        // mode "up": logged out → the purple slides up and the login screen drops in.
+        // target element: logged in → the purple shrinks into the home banner.  Neither → fade.
+        function exit(target, mode) {
+          if (gone || el.classList.contains("x")) return;
+          var wait = Math.max(0, INTRO - (Date.now() - t0));
+          setTimeout(function () {
+            var p = el.querySelector(".p"), w = el.querySelector(".w");
+            el.classList.add("x");
+            if (mode === "up" && !reduce) {
+              try { window.dispatchEvent(new Event("ybex:splash-up")); } catch (e) {}
+              el.style.pointerEvents = "none"; root.style.backgroundColor = "";
+              p.style.transition = "transform 280ms cubic-bezier(.5,0,.75,0)"; p.style.transform = "translateY(-102%)";
+              setTimeout(remove, 300); return;
+            }
+            var r = target && target.getBoundingClientRect && target.getBoundingClientRect();
+            var ok = r && r.width > 40 && r.height > 20 && r.top >= 0 && r.bottom <= window.innerHeight;
+            if (!ok || reduce) {
+              if (mode === "up") { try { window.dispatchEvent(new Event("ybex:splash-up")); } catch (e) {} }
+              el.style.transition = "opacity 280ms cubic-bezier(.22,1,.36,1)"; el.style.opacity = "0";
+              el.style.pointerEvents = "none"; setTimeout(remove, 300); return;
+            }
+            var ease = "380ms cubic-bezier(.65,0,.35,1)";                       // shrink into the banner
+            var rad = window.getComputedStyle(target).borderRadius || "22px";
+            p.style.transition = "top " + ease + ",left " + ease + ",width " + ease + ",height " + ease + ",border-radius " + ease;
+            p.style.top = r.top + "px"; p.style.left = r.left + "px";
+            p.style.width = r.width + "px"; p.style.height = r.height + "px"; p.style.borderRadius = rad;
+            w.style.transition = "transform " + ease + ", opacity 200ms ease-out 180ms";
+            w.style.transform = "translate(-50%,-50%) scale(.5)"; w.style.opacity = "0";
+            setTimeout(function () {                                           // hand off to the real banner
+              el.style.pointerEvents = "none";
+              el.style.transition = "opacity 320ms cubic-bezier(.22,1,.36,1)"; el.style.opacity = "0";
+              setTimeout(remove, 340);
+            }, 400);
+          }, wait);
+        }
+        window.__ybSplash = { exit: exit, readyAt: t0 + INTRO };
+        setTimeout(function () { exit(null, "up"); }, 9000);                 // never get stuck
+        setTimeout(remove, 10500);
+      })();
+    </script>
+    <div id="root"></div>
+    <!-- v334: placeholder shown only while #root is still empty (blogSeo.ts looks for the exact empty root div above). -->
+    <div id="yb-shell" aria-hidden="true"><i style="height:40px;width:52%"></i><i style="height:150px"></i><i style="height:84px"></i><i style="height:84px"></i><i style="height:84px"></i></div>
+    <script type="module" src="/src/index.jsx"></script>
+  </body>
+</html>

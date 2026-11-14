@@ -1,0 +1,32 @@
+<!-- Paste these keys inside the <dict> of ios/App/App/Info.plist (Xcode → App → Info). -->
+
+<!-- Sign-in comes back into the app through com.ybex.app://oauth#token=… -->
+<key>CFBundleURLTypes</key>
+<array>
+  <dict>
+    <key>CFBundleURLName</key>
+    <string>com.ybex.app</string>
+    <key>CFBundleURLSchemes</key>
+    <array><string>com.ybex.app</string></array>
+  </dict>
+</array>
+
+<!-- Why the app asks for photos / camera / files (Apple rejects without these lines) -->
+<key>NSPhotoLibraryUsageDescription</key>
+<string>Ybex uses your photos so you can add a profile photo, portfolio pictures and content drafts for brands.</string>
+<key>NSPhotoLibraryAddUsageDescription</key>
+<string>Ybex saves your receipts, media kit and delivered content to your photos when you choose to.</string>
+<key>NSCameraUsageDescription</key>
+<string>Ybex uses the camera so you can take a profile photo or record content for a brand.</string>
+<key>NSMicrophoneUsageDescription</key>
+<string>Ybex uses the microphone when you record a video for a brand.</string>
+
+<!-- Razorpay UPI: lets the payment page open your UPI app (GPay, PhonePe, Paytm…) -->
+<key>LSApplicationQueriesSchemes</key>
+<array>
+  <string>tez</string><string>phonepe</string><string>paytmmp</string><string>bhim</string><string>upi</string><string>credpay</string>
+</array>
+
+<!-- The app doesn't use its own encryption beyond HTTPS (answers App Store Connect's export question) -->
+<key>ITSAppUsesNonExemptEncryption</key>
+<false/>

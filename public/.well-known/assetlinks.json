@@ -1,0 +1,13 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.ybex.app",
+      "sha256_cert_fingerprints": [
+        "65:B7:E6:F3:7C:02:0F:E5:BA:ED:AA:7E:C1:21:8F:FA:DE:5F:92:AC:38:09:5F:E1:DB:48:2D:17:A7:DB:1B:FA",
+        "32:66:47:E9:44:3A:74:13:9F:41:D9:8A:72:0E:4C:52:89:9D:EE:B2:70:BC:36:44:FC:14:F2:32:45:E6:C6:41"
+      ]
+    }
+  }
+]

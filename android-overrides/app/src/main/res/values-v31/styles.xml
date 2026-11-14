@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- v334 (Ravi: "logo box 1–2 ms dikhta hai, direct animation dikhao"):
+     Android 12+ always draws a system splash with the app icon before the app starts. We can't remove the
+     splash, but we can make it a plain #7E00DC screen with NO icon — the same purple our own opening animation
+     starts on, so the person sees: purple → our animation. Copy this file over the generated
+     app/src/main/res/values-v31/styles.xml (merge if it already has other items). -->
+<resources>
+    <style name="Theme.LauncherActivity" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowSplashScreenBackground">#7E00DC</item>
+        <item name="android:windowSplashScreenAnimatedIcon">@drawable/splash_transparent</item>
+        <item name="android:windowSplashScreenIconBackgroundColor">#7E00DC</item>
+        <item name="android:windowSplashScreenAnimationDuration">0</item>
+        <item name="android:statusBarColor">#7E00DC</item>
+        <item name="android:navigationBarColor">#7E00DC</item>
+    </style>
+</resources>

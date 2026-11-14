@@ -1,0 +1,54 @@
+{
+  "appId": "com.ybex.app",
+  "appName": "Ybex",
+  "webDir": "../dist/client",
+  "backgroundColor": "#9B00FF",
+  "ios": {
+    "scheme": "Ybex",
+    "contentInset": "never",
+    "backgroundColor": "#9B00FF",
+    "limitsNavigationsToAppBoundDomains": false
+  },
+  "server": {
+    "iosScheme": "capacitor",
+    "allowNavigation": [
+      "ybexapp.ai.studio",
+      "ybexmedia.in",
+      "*.ybexmedia.in",
+      "checkout.razorpay.com",
+      "api.razorpay.com",
+      "*.razorpay.com"
+    ]
+  },
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 0,
+      "launchAutoHide": true,
+      "backgroundColor": "#9B00FF",
+      "showSpinner": false
+    },
+    "StatusBar": {
+      "overlaysWebView": true,
+      "style": "LIGHT"
+    },
+    "PushNotifications": {
+      "presentationOptions": [
+        "badge",
+        "sound",
+        "alert"
+      ]
+    },
+    "CapacitorUpdater": {
+      "autoUpdate": true,
+      "updateUrl": "https://ybexapp.ai.studio/api/app/ios-update",
+      "statsUrl": "",
+      "channelUrl": "",
+      "directUpdate": false,
+      "resetWhenUpdate": true,
+      "appReadyTimeout": 10000,
+      "version": "builtin",
+      "allowModifyUrl": true,
+      "persistModifyUrl": true
+    }
+  }
+}

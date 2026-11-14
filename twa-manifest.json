@@ -1,0 +1,55 @@
+{
+  "packageId": "com.ybex.app",
+  "host": "ybexapp.ai.studio",
+  "name": "Ybex - Influencer & Brand Collaboration",
+  "launcherName": "Ybex",
+  "themeColor": "#7E00DC",
+  "navigationColor": "#FFFFFF",
+  "backgroundColor": "#7E00DC",
+  "enableNotifications": true,
+  "startUrl": "/app",
+  "iconUrl": "/twa-splash-512.png",
+  "maskableIconUrl": "/pwa-maskable-512x512.png",
+  "splashScreenFadeOutDuration": 150,
+  "signingKey": {
+    "path": "./android.keystore",
+    "alias": "android"
+  },
+  "appVersionCode": 4,
+  "appVersionName": "1.0.3",
+  "shortcuts": [
+    {
+      "name": "Campaigns",
+      "shortName": "Campaigns",
+      "url": "/campaigns",
+      "chosenIconUrl": "/pwa-192x192.png"
+    },
+    {
+      "name": "Explore UGC",
+      "shortName": "UGC",
+      "url": "/creator/ugc",
+      "chosenIconUrl": "/pwa-192x192.png"
+    }
+  ],
+  "generatorApp": "bubblewrap-cli",
+  "webManifestUrl": "/manifest.json",
+  "fallbackType": "customtabs",
+  "features": {
+    "locationDelegation": {
+      "enabled": false
+    },
+    "playBilling": {
+      "enabled": false
+    }
+  },
+  "alphaDependencies": {
+    "enabled": false
+  },
+  "enableSiteSettingsShortcut": true,
+  "isChromeOSOnly": false,
+  "isMetaQuest": false,
+  "navigationColorDark": "#FFFFFF",
+  "navigationDividerColor": "#E5E5EA",
+  "navigationDividerColorDark": "#E5E5EA",
+  "monochromeIconUrl": "/notification-icon-512.png"
+}

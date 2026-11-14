@@ -1,0 +1,28 @@
+{
+  "name": "ybex-ios",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Ybex iPhone app (Capacitor shell). Carries the web build inside the app. See README.md.",
+  "scripts": {
+    "web": "cd .. && VITE_API_ORIGIN=${VITE_API_ORIGIN:-https://ybexapp.ai.studio} npx vite build && node scripts/ota-bundle.mjs",
+    "assets": "npx @capacitor/assets generate --ios --iconBackgroundColor '#9B00FF' --splashBackgroundColor '#9B00FF'",
+    "sync": "npm run web && node scripts/set-builtin-version.mjs && npx cap sync ios",
+    "open": "npx cap open ios",
+    "prepare:mac": "bash scripts/mac-prepare.sh"
+  },
+  "dependencies": {
+    "@capacitor/app": "^7.0.0",
+    "@capacitor/browser": "^7.0.0",
+    "@capacitor/core": "^7.0.0",
+    "@capacitor/ios": "^7.0.0",
+    "@capacitor/splash-screen": "^7.0.0",
+    "@capacitor/status-bar": "^7.0.0",
+    "@capacitor/push-notifications": "^7.0.0",
+    "@capgo/capacitor-updater": "^7.0.0",
+    "@capgo/capacitor-social-login": "^7.20.0"
+  },
+  "devDependencies": {
+    "@capacitor/assets": "^3.0.5",
+    "@capacitor/cli": "^7.0.0"
+  }
+}
